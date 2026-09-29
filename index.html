@@ -1,0 +1,1251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>EasierWorks — Toronto Technology &amp; AI Innovation Studio</title>
+<meta name="description" content="EasierWorks pairs a performance marketing agency with a technology and AI innovation hub in Toronto — funding new AI and tech ventures with agency revenue instead of outside investors.">
+<link rel="icon" href="data:,">
+<style>
+  :root{ color-scheme:light; box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px) }
+  html{ scroll-padding-top:env(safe-area-inset-top,0px) }
+  [hidden]:not([hidden=until-found i]){ display:none!important }
+
+  :root{
+    color-scheme: light;
+    --ink:#14131B; --ink-soft:#4B4E5C; --ink-faint:#8A8894;
+    --paper:#F4F3EE; --paper-raised:#FFFFFF; --paper-sunken:#ECEAE2;
+    --line:#E1DED4; --line-strong:#CFCBBC;
+    --amber:#E39A2E; --amber-deep:#B5751A; --amber-tint:#FBEBD3;
+    --violet:#6C5CE0; --violet-deep:#4C3CB8; --violet-tint:#EAE7FB;
+    --dark-surface:#1E1D28; --dark-surface-2:#26242F; --dark-line:rgba(244,243,238,.12);
+    --on-dark:#F4F3EE; --on-dark-soft:#B4B2C0;
+    --ok:#3F8F5E;
+    --radius-s:10px; --radius-m:16px; --radius-l:28px;
+    --font-display:'Bricolage Grotesque','Segoe UI',sans-serif;
+    --font-body:'Public Sans','Segoe UI',sans-serif;
+    --font-mono:'IBM Plex Mono','Courier New',monospace;
+    --shadow-1:0 1px 2px rgba(20,19,27,.06), 0 1px 1px rgba(20,19,27,.04);
+    --shadow-2:0 12px 32px -12px rgba(20,19,27,.28);
+    --ease:cubic-bezier(.22,.68,0,1);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:var(--font-body); font-size:17px; line-height:1.55;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    padding-inline:0;
+  }
+  img{max-width:100%; display:block}
+  a{color:inherit}
+  h1,h2,h3,h4{font-family:var(--font-display); margin:0; text-wrap:balance; font-weight:600; letter-spacing:-.01em}
+  p{margin:0}
+  ul{margin:0; padding:0; list-style:none}
+  button{font:inherit; cursor:pointer}
+  :focus-visible{outline:2px solid var(--violet); outline-offset:3px}
+  .wrap{max-width:1180px; margin-inline:auto; padding-inline:24px}
+  @media (min-width:720px){ .wrap{padding-inline:40px} }
+
+  /* ---------- Nav ---------- */
+  .nav{
+    position:sticky; top:env(safe-area-inset-top, 0px); z-index:60;
+    background:rgba(244,243,238,.86); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{ display:flex; align-items:center; justify-content:space-between; height:76px; gap:20px }
+  .brand{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .brand svg{ width:34px; height:34px; flex:none }
+  .brand-word{ font-family:var(--font-display); font-weight:700; font-size:19px; letter-spacing:-.01em; white-space:nowrap }
+  .brand-word b{ color:var(--amber-deep); font-weight:700 }
+  .nav-links{ display:none; align-items:center; gap:6px }
+  @media (min-width:900px){ .nav-links{ display:flex } }
+  .nav-links a{
+    text-decoration:none; font-size:14.5px; font-weight:600; color:var(--ink-soft);
+    padding:10px 14px; border-radius:999px; position:relative; transition:color .2s var(--ease);
+  }
+  .nav-links a:hover{ color:var(--ink) }
+  .nav-links a[aria-current="page"]{ color:var(--ink); background:var(--paper-sunken) }
+  .nav-cta{ display:flex; align-items:center; gap:10px }
+  .nav-toggle{
+    display:flex; align-items:center; justify-content:center; width:42px; height:42px;
+    border:1px solid var(--line-strong); border-radius:10px; background:var(--paper-raised);
+  }
+  @media (min-width:900px){ .nav-toggle{ display:none } }
+  .nav-toggle span, .nav-toggle span::before, .nav-toggle span::after{
+    content:""; display:block; width:18px; height:2px; background:var(--ink); position:relative; transition:transform .25s var(--ease), opacity .2s;
+  }
+  .nav-toggle span::before{ position:absolute; top:-6px }
+  .nav-toggle span::after{ position:absolute; top:6px }
+  .nav-toggle[aria-expanded="true"] span{ background:transparent }
+  .nav-toggle[aria-expanded="true"] span::before{ transform:translateY(6px) rotate(45deg) }
+  .nav-toggle[aria-expanded="true"] span::after{ transform:translateY(-6px) rotate(-45deg) }
+  .mobile-menu{ display:none; border-top:1px solid var(--line); background:var(--paper) }
+  .mobile-menu.open{ display:block }
+  .mobile-menu .wrap{ display:flex; flex-direction:column; padding-block:12px; gap:2px }
+  .mobile-menu a{ text-decoration:none; color:var(--ink); font-weight:600; font-size:16px; padding:12px 6px; border-bottom:1px solid var(--line) }
+  .mobile-menu a:last-child{ border-bottom:none }
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding:13px 22px; border-radius:999px; font-weight:700; font-size:15px;
+    text-decoration:none; border:1px solid transparent; transition:transform .2s var(--ease), box-shadow .2s var(--ease), background .2s;
+    white-space:nowrap;
+  }
+  .btn:active{ transform:scale(.97) }
+  .btn-primary{ background:var(--ink); color:var(--paper); }
+  .btn-primary:hover{ box-shadow:var(--shadow-2); transform:translateY(-2px) }
+  .btn-amber{ background:var(--amber); color:#231703 }
+  .btn-amber:hover{ box-shadow:0 12px 28px -10px rgba(227,154,46,.55); transform:translateY(-2px) }
+  .btn-ghost{ background:transparent; color:var(--ink); border-color:var(--line-strong) }
+  .btn-ghost:hover{ border-color:var(--ink) }
+  .btn-ghost-dark{ background:transparent; color:var(--on-dark); border-color:var(--dark-line) }
+  .btn-ghost-dark:hover{ border-color:var(--on-dark) }
+  .btn-sm{ padding:9px 16px; font-size:13.5px }
+
+  /* ---------- Page shell / transitions ---------- */
+  main{ display:block; overflow-x:clip }
+  .page{ display:block }
+  .page[hidden]{ display:none }
+  .page.entering{ animation:pageIn .5s var(--ease) both }
+  @keyframes pageIn{ from{ opacity:0; transform:translateY(14px) } to{ opacity:1; transform:none } }
+  @media (prefers-reduced-motion:reduce){ .page.entering{ animation:none } }
+
+  section{ padding-block:88px }
+  .section-tight{ padding-block:56px }
+  @media (max-width:640px){ section{ padding-block:64px } }
+  .bg-ink{ background:var(--ink); color:var(--on-dark) }
+  .bg-paper{ background:var(--paper) }
+  .bg-raised{ background:var(--paper-raised) }
+  .bg-sunken{ background:var(--paper-sunken) }
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px; font-family:var(--font-mono);
+    font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--amber-deep);
+    font-weight:600;
+  }
+  .bg-ink .eyebrow{ color:var(--amber) }
+  .eyebrow::before{ content:""; width:7px; height:7px; border-radius:50%; background:currentColor }
+
+  .lead{ font-size:20px; color:var(--ink-soft); max-width:56ch; line-height:1.6 }
+  .bg-ink .lead{ color:var(--on-dark-soft) }
+
+  /* ---------- Hero ---------- */
+  .hero{ position:relative; padding-block:64px 96px; overflow:hidden }
+  .hero-canvas-wrap{ position:absolute; inset:0; z-index:0 }
+  #heroCanvas{ position:absolute; inset:0; width:100%; height:100%; opacity:.9 }
+  .hero-grain{ position:absolute; inset:0; opacity:.5; mix-blend-mode:overlay; pointer-events:none }
+  .hero .wrap{ position:relative; z-index:2 }
+  .hero-grid{ display:grid; gap:40px; align-items:end }
+  @media (min-width:960px){ .hero-grid{ grid-template-columns:1.3fr .7fr } }
+  .hero h1{ font-size:clamp(40px,6.4vw,80px); line-height:1.03; color:var(--on-dark); margin-block:22px 20px }
+  .hero h1 em{ font-style:normal; color:var(--amber) }
+  .hero-actions{ display:flex; flex-wrap:wrap; gap:14px; margin-top:32px }
+  .hero-meta{ display:flex; flex-direction:column; gap:18px; padding-top:6px }
+  .hero-meta-item{ border-top:1px solid var(--dark-line); padding-top:14px }
+  .hero-meta-item b{ display:block; font-family:var(--font-display); font-size:26px; color:var(--on-dark) }
+  .hero-meta-item span{ font-size:13.5px; color:var(--on-dark-soft) }
+
+  /* ---------- Marquee ---------- */
+  .marquee{ border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--paper-sunken); overflow:hidden }
+  .marquee-track{ display:flex; gap:48px; white-space:nowrap; width:max-content; animation:marquee 26s linear infinite; padding-block:16px }
+  .marquee:hover .marquee-track{ animation-play-state:paused }
+  @keyframes marquee{ from{ transform:translateX(0) } to{ transform:translateX(-50%) } }
+  @media (prefers-reduced-motion:reduce){ .marquee-track{ animation:none; flex-wrap:wrap } }
+  .marquee-item{ display:flex; align-items:center; gap:10px; font-family:var(--font-mono); font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft) }
+  .marquee-item::before{ content:"—"; color:var(--amber-deep) }
+
+  /* ---------- Grid / cards ---------- */
+  .grid{ display:grid; gap:22px }
+  .grid-2{ grid-template-columns:1fr }
+  .grid-3{ grid-template-columns:1fr }
+  .grid-4{ grid-template-columns:1fr }
+  @media (min-width:640px){ .grid-2{ grid-template-columns:1fr 1fr } .grid-4{ grid-template-columns:1fr 1fr } }
+  @media (min-width:900px){ .grid-3{ grid-template-columns:repeat(3,1fr) } .grid-4{ grid-template-columns:repeat(4,1fr) } }
+
+  .card{ background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--radius-m); padding:28px; }
+  .card-flat{ padding:0; border:none; background:transparent }
+  .num{ font-family:var(--font-mono); font-size:13px; color:var(--amber-deep); font-weight:700 }
+  .card h3{ font-size:22px; margin-top:10px }
+  .card p{ color:var(--ink-soft); margin-top:10px; font-size:15.5px; line-height:1.55 }
+
+  .icon-badge{ width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; background:var(--violet-tint) }
+  .icon-badge svg{ width:22px; height:22px; stroke:var(--violet-deep) }
+
+  /* ---------- Section headers ---------- */
+  .section-head{ display:flex; flex-direction:column; gap:14px; max-width:780px; margin-bottom:48px }
+  .section-head h2{ font-size:clamp(30px,4vw,46px); line-height:1.08 }
+
+  /* ---------- Reveal ---------- */
+  .reveal{ opacity:1; transform:none; transition:opacity .7s var(--ease), transform .7s var(--ease) }
+  .js .reveal{ opacity:0; transform:translateY(22px) }
+  .js .reveal.in-view{ opacity:1; transform:none }
+  @media (prefers-reduced-motion:reduce){ .js .reveal{ opacity:1; transform:none; transition:none } }
+
+  /* ---------- Stats ---------- */
+  .stat-row{ display:grid; gap:28px; grid-template-columns:repeat(2,1fr) }
+  @media (min-width:760px){ .stat-row{ grid-template-columns:repeat(4,1fr) } }
+  .stat b{ display:block; font-family:var(--font-display); font-size:clamp(32px,5vw,52px); font-variant-numeric:tabular-nums }
+  .stat span{ font-size:13.5px; color:var(--ink-soft) }
+  .bg-ink .stat span{ color:var(--on-dark-soft) }
+
+  /* ---------- Tags ---------- */
+  .tag-pill{ display:inline-flex; align-items:center; padding:6px 14px; border-radius:999px; background:var(--amber-tint); color:var(--amber-deep); font-size:12.5px; font-weight:700; letter-spacing:.02em }
+  .tag-pill.violet{ background:var(--violet-tint); color:var(--violet-deep) }
+  .tag-row{ display:flex; flex-wrap:wrap; gap:8px }
+
+  /* ---------- Process (How We Work) ---------- */
+  .process-list{ display:flex; flex-direction:column }
+  .process-item{ display:grid; grid-template-columns:64px 1fr; gap:24px; padding-block:32px; border-top:1px solid var(--line) }
+  .process-item:last-child{ border-bottom:1px solid var(--line) }
+  .process-num{ font-family:var(--font-mono); font-size:14px; color:var(--amber-deep); font-weight:700; padding-top:4px }
+  .process-item h3{ font-size:25px }
+  .process-item p{ color:var(--ink-soft); margin-top:8px; max-width:64ch }
+
+  /* ---------- Timeline (agency flow) ---------- */
+  .flow{ display:grid; gap:18px; grid-template-columns:1fr; align-items:stretch }
+  @media (min-width:860px){ .flow{ grid-template-columns:1fr 44px 1fr } }
+  .flow-arrow{ display:flex; align-items:center; justify-content:center; color:var(--amber) }
+  .flow-arrow svg{ width:26px; height:26px; transform:rotate(90deg) }
+  @media (min-width:860px){ .flow-arrow svg{ transform:none } }
+
+  /* ---------- Contact ---------- */
+  .contact-grid{ display:grid; gap:40px; grid-template-columns:1fr }
+  @media (min-width:900px){ .contact-grid{ grid-template-columns:1fr 1fr } }
+  .field{ display:flex; flex-direction:column; gap:8px; margin-bottom:18px }
+  .field label{ font-size:13.5px; font-weight:700; color:var(--ink-soft) }
+  .field input, .field select, .field textarea{
+    border:1px solid var(--line-strong); border-radius:10px; padding:13px 14px; font:inherit; background:var(--paper-raised); color:var(--ink);
+  }
+  .field textarea{ resize:vertical; min-height:120px }
+  .field input:focus, .field textarea:focus, .field select:focus{ border-color:var(--violet) }
+  .copy-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; border:1px solid var(--dark-line); border-radius:12px; padding:14px 16px; background:var(--dark-surface-2) }
+  .copy-row span{ font-family:var(--font-mono); font-size:15px }
+  .copy-btn{ border:1px solid var(--dark-line); background:transparent; color:var(--on-dark); border-radius:8px; padding:7px 12px; font-size:12.5px; font-weight:700 }
+  .copy-btn:hover{ border-color:var(--amber); color:var(--amber) }
+  .form-note{ font-size:13px; color:var(--ink-faint); margin-top:8px }
+  .success-box{ display:none; border:1px solid var(--ok); background:#EAF6EE; color:#245C3B; padding:16px 18px; border-radius:12px; font-weight:600; margin-bottom:18px }
+  .success-box.show{ display:block }
+
+  /* ---------- Footer ---------- */
+  footer{ background:var(--ink); color:var(--on-dark-soft); padding-block:56px 40px }
+  .footer-top{ display:grid; gap:36px; grid-template-columns:1fr; padding-bottom:36px; border-bottom:1px solid var(--dark-line) }
+  @media (min-width:760px){ .footer-top{ grid-template-columns:1.4fr 1fr 1fr 1fr } }
+  .footer-top h4{ color:var(--on-dark); font-size:14px; margin-bottom:14px; font-family:var(--font-mono); letter-spacing:.06em; text-transform:uppercase }
+  .footer-top a{ display:block; text-decoration:none; color:var(--on-dark-soft); font-size:14.5px; padding-block:6px }
+  .footer-top a:hover{ color:var(--on-dark) }
+  .footer-bottom{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; padding-top:26px; font-size:13px }
+
+  .divider-fade{ height:1px; background:linear-gradient(90deg, transparent, var(--line-strong), transparent); border:none; margin-block:0 }
+  .quote{ font-family:var(--font-display); font-size:clamp(24px,3vw,34px); line-height:1.35; color:var(--ink) }
+  .bg-ink .quote{ color:var(--on-dark) }
+
+  .split{ display:grid; gap:44px; grid-template-columns:1fr }
+  @media (min-width:900px){ .split{ grid-template-columns:1fr 1fr; align-items:center } }
+  .avatar{ width:100%; aspect-ratio:4/5; border-radius:var(--radius-l); background:linear-gradient(160deg, var(--violet-tint), var(--amber-tint)); position:relative; overflow:hidden; border:1px solid var(--line) }
+  .avatar svg{ position:absolute; inset:0; width:100%; height:100% }
+
+  /* ---------- Custom cursor ---------- */
+  .cursor-dot, .cursor-ring{ position:fixed; top:0; left:0; pointer-events:none; z-index:9999; border-radius:50%; opacity:0; transition:opacity .3s var(--ease), width .25s var(--ease), height .25s var(--ease), border-color .25s var(--ease), background .25s var(--ease) }
+  .cursor-dot{ width:7px; height:7px; background:var(--amber) }
+  .cursor-ring{ width:34px; height:34px; border:1.5px solid var(--line-strong) }
+  .cursor-active .cursor-dot, .cursor-active .cursor-ring{ opacity:1 }
+  .cursor-hover .cursor-ring{ width:54px; height:54px; border-color:var(--amber); background:rgba(227,154,46,.08) }
+  .cursor-hover .cursor-dot{ opacity:0 }
+  @media (hover:hover) and (pointer:fine){
+    .has-cursor, .has-cursor a, .has-cursor button, .has-cursor input, .has-cursor textarea, .has-cursor select{ cursor:none }
+  }
+
+  /* ---------- Route transition bar ---------- */
+  .route-bar{ position:fixed; top:env(safe-area-inset-top,0px); left:0; height:2.5px; width:0; background:linear-gradient(90deg,var(--amber),var(--violet)); z-index:70; opacity:0; transition:width .3s var(--ease), opacity .2s }
+  .route-bar.on{ opacity:1 }
+
+  /* ---------- Aurora canvas ---------- */
+  #auroraCanvas{ position:absolute; inset:0; width:100%; height:100%; opacity:.6 }
+
+  /* ---------- Card tilt + depth ---------- */
+  .card{ transform-style:preserve-3d; transition:transform .35s var(--ease), box-shadow .35s var(--ease); will-change:transform }
+  .card:hover{ box-shadow:var(--shadow-2) }
+
+  /* ---------- Icon draw-in ---------- */
+  .icon-badge svg path, .icon-badge svg circle, .icon-badge svg rect{ transition:stroke-dashoffset 1.1s var(--ease) }
+
+  /* ---------- Count-up numerals ---------- */
+  .count{ font-variant-numeric:tabular-nums }
+
+  /* ---------- Staggered reveal ---------- */
+  .reveal{ transition-delay:var(--stagger,0ms) }
+
+  /* ---------- Reduced motion overrides ---------- */
+  @media (prefers-reduced-motion:reduce){
+    .cursor-dot, .cursor-ring, .route-bar{ display:none !important }
+    .card{ transition:none !important; transform:none !important }
+  }
+</style>
+</head>
+<body>
+<div class="js-guard"></div>
+<div class="route-bar" id="routeBar" aria-hidden="true"></div>
+<div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+
+<nav class="nav" id="siteNav">
+  <div class="wrap nav-row">
+    <a href="#home" class="brand" data-nav="home" aria-label="EasierWorks home">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="1" y="1" width="46" height="46" rx="13" fill="#14131B"/>
+        <path d="M14 32V16h13" stroke="#E39A2E" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M14 24h9" stroke="#E39A2E" stroke-width="3.4" stroke-linecap="round"/>
+        <circle cx="33" cy="16" r="4.2" fill="#6C5CE0"/>
+      </svg>
+      <span class="brand-word">Easier<b>Works</b></span>
+    </a>
+    <div class="nav-links" role="navigation" aria-label="Primary">
+      <a href="#home" data-nav="home">Home</a>
+      <a href="#how-we-work" data-nav="how-we-work">How We Work</a>
+      <a href="#projects" data-nav="projects">Projects</a>
+      <a href="#marketing" data-nav="marketing">Marketing Services</a>
+      <a href="#partners" data-nav="partners">Partner With Us</a>
+      <a href="#about" data-nav="about">About</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#contact" data-nav="contact" class="btn btn-primary btn-sm" style="display:none" id="navContactBtn">Contact</a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle menu"><span></span></button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="wrap">
+      <a href="#home" data-nav="home">Home</a>
+      <a href="#how-we-work" data-nav="how-we-work">How We Work</a>
+      <a href="#projects" data-nav="projects">Projects</a>
+      <a href="#marketing" data-nav="marketing">Marketing Services</a>
+      <a href="#partners" data-nav="partners">Partner With Us</a>
+      <a href="#about" data-nav="about">About</a>
+      <a href="#contact" data-nav="contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- ============ HOME ============ -->
+<section class="page" id="page-home" data-page="home">
+
+  <div class="hero bg-ink">
+    <div class="hero-canvas-wrap">
+      <canvas id="auroraCanvas" aria-hidden="true"></canvas>
+      <canvas id="heroCanvas" aria-hidden="true"></canvas>
+      <svg class="hero-grain" width="100%" height="100%" aria-hidden="true">
+        <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.05 0"/></filter>
+        <rect width="100%" height="100%" filter="url(#grain)"/>
+      </svg>
+    </div>
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow">Toronto — Technology &amp; AI Innovation Studio</span>
+          <h1>We build the <em>AI and technology</em> ventures worth funding&nbsp;— then fund them ourselves.</h1>
+          <p class="lead">EasierWorks pairs a performance marketing practice with a growing lab of technology and AI products. One arm earns; the other builds. No outside investor decides what gets made.</p>
+          <div class="hero-actions">
+            <a href="#projects" data-nav="projects" class="btn btn-amber">See what we're building</a>
+            <a href="#marketing" data-nav="marketing" class="btn btn-ghost-dark">Marketing services</a>
+          </div>
+        </div>
+        <div class="hero-meta">
+          <div class="hero-meta-item"><b><span class="count" data-target="12">0</span> yrs</b><span>Paid media &amp; performance marketing experience behind the studio</span></div>
+          <div class="hero-meta-item"><b>$<span class="count" data-target="10">0</span>M+ USD</b><span>In Meta, Google, social &amp; programmatic spend managed</span></div>
+          <div class="hero-meta-item"><b><span class="count" data-target="4">0</span></b><span>Technology &amp; AI focus areas in active development</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="marquee">
+    <div class="marquee-track" id="marqueeTrack">
+      <div class="marquee-item">Applied AI</div>
+      <div class="marquee-item">Product Engineering</div>
+      <div class="marquee-item">Paid Media</div>
+      <div class="marquee-item">Brand &amp; Graphics</div>
+      <div class="marquee-item">Web Development</div>
+      <div class="marquee-item">Game Development</div>
+      <div class="marquee-item">Hardware Prototyping</div>
+      <div class="marquee-item">Community Platforms</div>
+    </div>
+  </div>
+
+  <section class="bg-paper">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">The model</span>
+        <h2>Two practices, one balance sheet.</h2>
+        <p class="lead">Most studios chase grants or investors before they've built anything. We flipped the order: the agency generates real revenue first, and that revenue is what funds the innovation work.</p>
+      </div>
+      <div class="flow reveal">
+        <div class="card">
+          <span class="num">01 — Revenue engine</span>
+          <h3>Digital Marketing</h3>
+          <p>Paid media, social, brand and web development for small and mid-sized businesses across Ontario and Canada. Predictable, client-funded income.</p>
+        </div>
+        <div class="flow-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 12h15M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="card">
+          <span class="num">02 — Innovation lab</span>
+          <h3>Technology &amp; AI</h3>
+          <p>Games, travel platforms, wearable hardware and community products — built by partners who keep majority ownership of what they make.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-sunken">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Focus areas</span>
+        <h2>Where the lab is looking first.</h2>
+      </div>
+      <div class="grid grid-4 reveal">
+        <div class="card">
+          <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4-8h6l4 8-4 8H9l-4-8Z" stroke="currentColor" stroke-width="1.6"/></svg></div>
+          <h3 style="font-size:19px">Game Development</h3>
+          <p>Concept prototypes through to shippable indie titles.</p>
+        </div>
+        <div class="card">
+          <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 12h17M12 3.5c2.6 2.4 4 5.4 4 8.5s-1.4 6.1-4 8.5c-2.6-2.4-4-5.4-4-8.5s1.4-6.1 4-8.5Z" stroke="currentColor" stroke-width="1.6"/></svg></div>
+          <h3 style="font-size:19px">Travel Platforms</h3>
+          <p>Booking tools, itinerary planners and niche travel communities.</p>
+        </div>
+        <div class="card">
+          <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none"><rect x="7" y="2" width="10" height="20" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M11 18h2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <h3 style="font-size:19px">Wearable Hardware</h3>
+          <p>Health, fitness and accessibility-focused device concepts.</p>
+        </div>
+        <div class="card">
+          <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none"><circle cx="8" cy="9" r="2.6" stroke="currentColor" stroke-width="1.6"/><circle cx="16" cy="9" r="2.6" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 19c.7-3 2.5-4.6 4.5-4.6S11.8 16 12.5 19M11.5 19c.7-3 2.5-4.6 4.5-4.6s3.8 1.6 4.5 4.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <h3 style="font-size:19px">Online Communities</h3>
+          <p>Niche spaces built around one real, shared interest.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-ink">
+    <div class="wrap">
+      <div class="split reveal">
+        <div>
+          <span class="eyebrow">Why it works</span>
+          <p class="quote" style="margin-top:16px">"Most passion projects die between an idea and a paying customer. We built EasierWorks so that gap gets funded instead of ignored."</p>
+          <p class="lead" style="margin-top:20px">— Warren Chanansingh, Founder</p>
+        </div>
+        <div class="stat-row">
+          <div class="stat"><b>60–<span class="count" data-target="70">0</span>%</b><span>Ownership contributors keep on their own project</span></div>
+          <div class="stat"><b><span class="count" data-target="2027">0</span></b><span>First innovation pilot targeted for launch</span></div>
+          <div class="stat"><b><span class="count" data-target="5">0</span></b><span>Spots in the founding partner cohort</span></div>
+          <div class="stat"><b>0</b><span>Outside investors deciding what we build</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-paper">
+    <div class="wrap" style="text-align:center; display:flex; flex-direction:column; align-items:center; gap:22px">
+      <h2 style="font-size:clamp(28px,4vw,44px); max-width:20ch">Have a project, or a business that needs marketing?</h2>
+      <div style="display:flex; gap:14px; flex-wrap:wrap; justify-content:center">
+        <a href="#partners" data-nav="partners" class="btn btn-primary">Pitch us your project</a>
+        <a href="#contact" data-nav="contact" class="btn btn-ghost">Book a marketing consult</a>
+      </div>
+    </div>
+  </section>
+
+</section>
+
+<!-- ============ HOW WE WORK ============ -->
+<section class="page" id="page-how-we-work" data-page="how-we-work" hidden>
+  <section class="bg-ink section-tight" style="padding-top:64px">
+    <div class="wrap">
+      <span class="eyebrow">How we work</span>
+      <h1 style="color:var(--on-dark); font-size:clamp(34px,5vw,58px); margin-top:16px; max-width:16ch">From client work to shipped technology, in one loop.</h1>
+      <p class="lead" style="margin-top:16px">The whole model rests on discipline in a specific order. Here's what actually happens, step by step.</p>
+    </div>
+  </section>
+
+  <section class="bg-paper">
+    <div class="wrap">
+      <div class="process-list reveal">
+        <div class="process-item">
+          <span class="process-num">01</span>
+          <div><h3>Agency work funds the runway</h3><p>Client retainers in paid media, social, brand and web development come in first. This is real, invoiced revenue — not a projection.</p></div>
+        </div>
+        <div class="process-item">
+          <span class="process-num">02</span>
+          <div><h3>A share is reserved for innovation</h3><p>A defined slice of agency profit is set aside specifically to fund innovation-lab projects, released only after client obligations are covered.</p></div>
+        </div>
+        <div class="process-item">
+          <span class="process-num">03</span>
+          <div><h3>Partners bring a project, we bring structure</h3><p>An innovation partner brings an existing project or prototype. EasierWorks brings the legal entity, IP protection, seed capital and admin.</p></div>
+        </div>
+        <div class="process-item">
+          <span class="process-num">04</span>
+          <div><h3>Ownership stays majority-partner</h3><p>The partner holds 60–70% of their project's equity and controls how it's built. EasierWorks holds a minority stake for what it provided.</p></div>
+        </div>
+        <div class="process-item">
+          <span class="process-num">05</span>
+          <div><h3>What ships feeds back into the brand</h3><p>A shipped project brings attention, talent and credibility back to the agency — which brings in the next client, and the next project.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-sunken">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Working legally, on purpose</span>
+        <h2>You're an owner, not unpaid staff.</h2>
+        <p class="lead">Equity never substitutes for wages on directed work — that's an Ontario employment-standards violation, and it's the exact trap most "join us, get equity" arrangements fall into.</p>
+      </div>
+      <div class="grid grid-2 reveal">
+        <div class="card">
+          <span class="num">On your own project</span>
+          <h3 style="font-size:20px">Owner-operator</h3>
+          <p>You set your own hours and methods, and are compensated in majority equity that vests over time — because you're building your own asset, not taking direction.</p>
+        </div>
+        <div class="card">
+          <span class="num">On agency work</span>
+          <h3 style="font-size:20px">Always paid</h3>
+          <p>Anyone doing directed client work is a paid contractor or employee — fee, invoice, or wage. Equity is never offered in place of pay for directed work.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-paper" style="text-align:center">
+    <div class="wrap" style="display:flex; flex-direction:column; align-items:center; gap:22px">
+      <h2 style="font-size:clamp(26px,4vw,38px); max-width:22ch">Want the structure working for your project?</h2>
+      <a href="#partners" data-nav="partners" class="btn btn-primary">See the partner deal</a>
+    </div>
+  </section>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section class="page" id="page-projects" data-page="projects" hidden>
+  <section class="bg-ink section-tight" style="padding-top:64px">
+    <div class="wrap">
+      <span class="eyebrow">Projects &amp; focus areas</span>
+      <h1 style="color:var(--on-dark); font-size:clamp(34px,5vw,58px); margin-top:16px; max-width:18ch">What we're building in the lab.</h1>
+      <p class="lead" style="margin-top:16px">EasierWorks is an early-stage studio. Rather than pad this page with invented case studies, here's exactly where we are: the categories we're funding first, and how a project moves from idea to shipped.</p>
+    </div>
+  </section>
+
+  <section class="bg-paper">
+    <div class="wrap">
+      <div class="grid grid-2 reveal">
+        <div class="card">
+          <span class="tag-pill">In scoping</span>
+          <h3 style="margin-top:14px">Game Development</h3>
+          <p>Small, focused titles from partners with an existing prototype or a shipped game already behind them. We're looking for scope discipline over scale.</p>
+        </div>
+        <div class="card">
+          <span class="tag-pill violet">In scoping</span>
+          <h3 style="margin-top:14px">Travel Service Platforms</h3>
+          <p>Booking tools, itinerary planning software, or niche communities built around a specific kind of trip or traveller.</p>
+        </div>
+        <div class="card">
+          <span class="tag-pill">Early concept</span>
+          <h3 style="margin-top:14px">Wearable Hardware</h3>
+          <p>Health, fitness or accessibility-focused hardware — concepts that need a legal and commercial home more than they need funding.</p>
+        </div>
+        <div class="card">
+          <span class="tag-pill violet">Early concept</span>
+          <h3 style="margin-top:14px">Online Communities</h3>
+          <p>Platforms built around one real, shared interest, with a plausible path to sustaining themselves.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-sunken">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Roadmap</span>
+        <h2>From registration to a proven model.</h2>
+      </div>
+      <div class="grid grid-4 reveal">
+        <div class="card"><span class="num">Nov 2026</span><h3 style="font-size:19px; margin-top:10px">Incorporation complete</h3><p>Legal structure, bank account and CRA accounts in place.</p></div>
+        <div class="card"><span class="num">Jan 2027</span><h3 style="font-size:19px; margin-top:10px">Agency opens for clients</h3><p>Revenue engine switches on; first innovation pilot approved.</p></div>
+        <div class="card"><span class="num">End 2027</span><h3 style="font-size:19px; margin-top:10px">First pilot validated</h3><p>Three recurring clients funding one proven innovation project.</p></div>
+        <div class="card"><span class="num">2028</span><h3 style="font-size:19px; margin-top:10px">Scale what's working</h3><p>Additional projects funded, first full-time hire.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-paper" style="text-align:center">
+    <div class="wrap" style="display:flex; flex-direction:column; align-items:center; gap:22px">
+      <h2 style="font-size:clamp(26px,4vw,38px); max-width:24ch">Have a project in one of these categories?</h2>
+      <a href="#partners" data-nav="partners" class="btn btn-primary">Read the partner deal</a>
+    </div>
+  </section>
+</section>
+
+<!-- ============ MARKETING SERVICES ============ -->
+<section class="page" id="page-marketing" data-page="marketing" hidden>
+  <section class="bg-ink section-tight" style="padding-top:64px">
+    <div class="wrap">
+      <span class="eyebrow">Digital marketing services</span>
+      <h1 style="color:var(--on-dark); font-size:clamp(34px,5vw,58px); margin-top:16px; max-width:18ch">Performance marketing, run by someone who's placed the media before.</h1>
+      <p class="lead" style="margin-top:16px">Twelve years managing paid media for other people's businesses, now available to yours — and funding a technology lab on the side.</p>
+      <div class="stat-row" style="margin-top:44px; max-width:640px">
+        <div class="stat"><b><span class="count" data-target="12">0</span> yrs</b><span>Paid media experience</span></div>
+        <div class="stat"><b>$<span class="count" data-target="10">0</span>M+</b><span>USD in ad spend managed</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-paper">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Services</span>
+        <h2>Four services, tightly scoped.</h2>
+        <p class="lead">We'd rather do four things well for a handful of clients than everything for everyone.</p>
+      </div>
+      <div class="grid grid-4 reveal">
+        <div class="card">
+          <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none"><path d="M3 17l6-6 4 4 8-8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3 style="font-size:19px">Paid Media</h3>
+          <p>Meta, Google and programmatic campaigns, built and optimized by someone who has managed eight figures of spend.</p>
+        </div>
+        <div class="card">
+          <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none"><path d="M7 8h10M7 12h6M7 16h9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <h3 style="font-size:19px">Social Media</h3>
+          <p>Content strategy, scheduling and community management that turns attention into a pipeline, not just impressions.</p>
+        </div>
+        <div class="card">
+          <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3.4" stroke="currentColor" stroke-width="1.6"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <h3 style="font-size:19px">Graphics &amp; Brand</h3>
+          <p>Identity, ad creative and campaign assets designed to hold up across every platform they run on.</p>
+        </div>
+        <div class="card">
+          <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 9h18" stroke="currentColor" stroke-width="1.6"/></svg></div>
+          <h3 style="font-size:19px">Web Development</h3>
+          <p>Fast, conversion-minded websites built to support whatever the campaign is trying to do.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-sunken">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Who it's for</span>
+        <h2>Small and mid-sized businesses, mostly in Ontario.</h2>
+      </div>
+      <div class="grid grid-2 reveal">
+        <div class="card">
+          <span class="num">Engagement</span>
+          <h3 style="font-size:20px">Monthly retainer</h3>
+          <p>Typically $1,000–$1,500 per month, scoped to one or two channels done properly rather than everything done thinly.</p>
+        </div>
+        <div class="card">
+          <span class="num">Availability</span>
+          <h3 style="font-size:20px">Now booking Q1 2027</h3>
+          <p>The agency opens for client work in January 2027. Early conversations are welcome now — capacity is limited by design.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-paper" style="text-align:center">
+    <div class="wrap" style="display:flex; flex-direction:column; align-items:center; gap:22px">
+      <h2 style="font-size:clamp(26px,4vw,38px); max-width:22ch">Want to be one of the first three clients?</h2>
+      <a href="#contact" data-nav="contact" class="btn btn-primary">Start the conversation</a>
+    </div>
+  </section>
+</section>
+
+<!-- ============ PARTNER WITH US ============ -->
+<section class="page" id="page-partners" data-page="partners" hidden>
+  <section class="bg-ink section-tight" style="padding-top:64px">
+    <div class="wrap">
+      <span class="eyebrow">Innovation partners</span>
+      <h1 style="color:var(--on-dark); font-size:clamp(34px,5vw,58px); margin-top:16px; max-width:18ch">Bring your project. Keep the majority. Skip the fundraising grind.</h1>
+      <p class="lead" style="margin-top:16px">Up to five spots in the founding partner cohort. Real structure, real capital, real protection — without giving up control of what you built.</p>
+    </div>
+  </section>
+
+  <section class="bg-paper">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">The ownership deal</span>
+        <h2>You keep the majority. We take a working stake.</h2>
+      </div>
+      <div class="grid grid-2 reveal">
+        <div class="card" style="background:var(--amber-tint); border-color:transparent">
+          <b style="font-family:var(--font-display); font-size:56px; display:block">60–70%</b>
+          <p style="margin-top:8px; font-weight:700">You, the contributor</p>
+          <p>Majority equity in your own project, vesting over 2–4 years.</p>
+        </div>
+        <div class="card" style="background:var(--violet-tint); border-color:transparent">
+          <b style="font-family:var(--font-display); font-size:56px; display:block">30–40%</b>
+          <p style="margin-top:8px; font-weight:700">EasierWorks Inc.</p>
+          <p>In exchange for the legal entity, seed capital, admin, and go-to-market support.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-sunken">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Why join, specifically</span>
+        <h2>Why this beats going it alone.</h2>
+      </div>
+      <div class="grid grid-3 reveal">
+        <div class="card"><span class="num">01</span><h3 style="font-size:19px; margin-top:10px">Keep control</h3><p>Most accelerators take 6–10%+ for a few months of mentorship. You keep the majority, permanently.</p></div>
+        <div class="card"><span class="num">02</span><h3 style="font-size:19px; margin-top:10px">Skip the pitch deck circuit</h3><p>The agency already generates revenue. You're not fundraising before you've built anything.</p></div>
+        <div class="card"><span class="num">03</span><h3 style="font-size:19px; margin-top:10px">Protection from day one</h3><p>Real IP assignment, real contracts, real employment-law compliance.</p></div>
+        <div class="card"><span class="num">04</span><h3 style="font-size:19px; margin-top:10px">The hard part's done</h3><p>Incorporation, legal review and compliance are handled before you join.</p></div>
+        <div class="card"><span class="num">05</span><h3 style="font-size:19px; margin-top:10px">Fair vesting, both ways</h3><p>Protects your stake if you build it out, and the company if someone leaves early.</p></div>
+        <div class="card"><span class="num">06</span><h3 style="font-size:19px; margin-top:10px">A small, high-trust cohort</h3><p>Up to five founding partners, not an open call. Early means real influence.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-paper">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">The ask</span>
+        <h2>What we're asking, and what you get back.</h2>
+      </div>
+      <div class="grid grid-2 reveal">
+        <div class="card">
+          <span class="num">From you</span>
+          <ul style="margin-top:14px; display:flex; flex-direction:column; gap:10px">
+            <li>— Bring your project and existing IP</li>
+            <li>— Sign the Project Participation Agreement</li>
+            <li>— Commit roughly 10–15 hours a month to start</li>
+          </ul>
+        </div>
+        <div class="card" style="background:var(--ink); color:var(--on-dark); border-color:transparent">
+          <span class="num" style="color:var(--amber)">From EasierWorks</span>
+          <ul style="margin-top:14px; display:flex; flex-direction:column; gap:10px; color:var(--on-dark-soft)">
+            <li>— Legal entity, IP structure, and compliance</li>
+            <li>— Funded runway from agency revenue</li>
+            <li>— Admin, accounting, and go-to-market support</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-sunken" style="text-align:center">
+    <div class="wrap" style="display:flex; flex-direction:column; align-items:center; gap:22px">
+      <h2 style="font-size:clamp(26px,4vw,38px); max-width:22ch">Ready to talk about your project?</h2>
+      <a href="#contact" data-nav="contact" class="btn btn-primary">Pitch your project</a>
+    </div>
+  </section>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="page" id="page-about" data-page="about" hidden>
+  <section class="bg-paper section-tight" style="padding-top:88px">
+    <div class="wrap">
+      <div class="split reveal">
+        <div>
+          <span class="eyebrow">About EasierWorks</span>
+          <h1 style="font-size:clamp(32px,5vw,52px); margin-top:16px">Built by a marketer who got tired of watching good ideas stall.</h1>
+          <p class="lead" style="margin-top:18px">EasierWorks is a Toronto-based technology and AI innovation studio, funded by a performance marketing practice rather than outside investors. It exists so that good technology ideas — including ones that aren't Warren's — get a real shot at being built, protected, and owned mostly by the people who build them.</p>
+        </div>
+        <div class="avatar">
+          <svg viewBox="0 0 300 375" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="avatarGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EAE7FB"/><stop offset="1" stop-color="#FBEBD3"/></linearGradient></defs>
+            <rect width="300" height="375" fill="url(#avatarGrad)"/>
+            <circle cx="150" cy="150" r="58" fill="#14131B" opacity=".08"/>
+            <path d="M70 330c0-58 36-96 80-96s80 38 80 96" fill="#14131B" opacity=".08"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-sunken">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Founder</span>
+        <h2>Warren Chanansingh</h2>
+      </div>
+      <div class="grid grid-2 reveal">
+        <div class="card">
+          <h3 style="font-size:20px">Twelve years in paid media</h3>
+          <p>Warren has spent twelve years as a digital strategist in paid media advertising, managing more than $10M USD across Meta, Google, social and programmatic campaigns — with a focus on paid media strategy, audience growth and customer conversion.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size:20px">Master of Digital Media, TMU</h3>
+          <p>He's currently completing a Master of Digital Media at Toronto Metropolitan University's Creative School, graduating December 2026 — building EasierWorks alongside his final year of study.</p>
+        </div>
+      </div>
+      <div class="tag-row reveal" style="margin-top:28px">
+        <span class="tag-pill">Toronto, Ontario</span>
+        <span class="tag-pill violet">Paid Media Strategy</span>
+        <span class="tag-pill">Audience Growth</span>
+        <span class="tag-pill violet">Conversion Optimization</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-paper">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">What we believe</span>
+        <h2>Three things we won't compromise on.</h2>
+      </div>
+      <div class="grid grid-3 reveal">
+        <div class="card"><span class="num">Ownership</span><h3 style="font-size:19px; margin-top:10px">Builders keep the majority</h3><p>An innovation partner should own most of what they build. We take a working stake, not a controlling one.</p></div>
+        <div class="card"><span class="num">Compliance</span><h3 style="font-size:19px; margin-top:10px">No shortcuts on the law</h3><p>Real contracts, real IP assignment, real employment-standards compliance — from the first partner onward.</p></div>
+        <div class="card"><span class="num">Discipline</span><h3 style="font-size:19px; margin-top:10px">Revenue before ambition</h3><p>Nothing gets funded that the agency hasn't already earned. No project runs on borrowed optimism.</p></div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="page" id="page-contact" data-page="contact" hidden>
+  <section class="bg-ink section-tight" style="padding-top:88px">
+    <div class="wrap">
+      <span class="eyebrow">Contact</span>
+      <h1 style="color:var(--on-dark); font-size:clamp(32px,5vw,52px); margin-top:16px; max-width:18ch">Let's talk about your project, or your marketing.</h1>
+      <p class="lead" style="margin-top:16px">Tell us which one brought you here and we'll get back to you directly.</p>
+    </div>
+  </section>
+
+  <section class="bg-paper">
+    <div class="wrap contact-grid">
+      <div class="reveal">
+        <div class="success-box" id="formSuccess">Thanks — your message is queued. We'll reply from warren.chanansingh@hotmail.com within a couple of days.</div>
+        <form id="contactForm" novalidate>
+          <div class="field">
+            <label for="cf-name">Name</label>
+            <input id="cf-name" name="name" type="text" required autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="cf-email">Email</label>
+            <input id="cf-email" name="email" type="email" required autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="cf-reason">This is about</label>
+            <select id="cf-reason" name="reason">
+              <option>Marketing services</option>
+              <option>Pitching an innovation project</option>
+              <option>Partnership / general inquiry</option>
+              <option>Press</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="cf-message">Message</label>
+            <textarea id="cf-message" name="message" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send message</button>
+          <p class="form-note">This form runs on this page only — it doesn't send anywhere on its own yet. Use the direct details alongside it if you need a reply quickly.</p>
+        </form>
+      </div>
+      <div class="reveal" style="display:flex; flex-direction:column; gap:16px">
+        <div class="copy-row" style="background:var(--paper-sunken); border-color:var(--line-strong)">
+          <span style="color:var(--ink)">warren.chanansingh@hotmail.com</span>
+          <button class="copy-btn" data-copy="warren.chanansingh@hotmail.com" style="border-color:var(--line-strong); color:var(--ink)">Copy</button>
+        </div>
+        <div class="copy-row" style="background:var(--paper-sunken); border-color:var(--line-strong)">
+          <span style="color:var(--ink)">+1 437 422 4684</span>
+          <button class="copy-btn" data-copy="+1 437 422 4684" style="border-color:var(--line-strong); color:var(--ink)">Copy</button>
+        </div>
+        <div class="card" style="margin-top:8px">
+          <span class="num">Based in</span>
+          <h3 style="font-size:20px">Toronto, Ontario</h3>
+          <p>Remote-first. The agency serves clients across Ontario and Canada; the lab works with partners based in Canada.</p>
+        </div>
+        <div class="card">
+          <span class="num">Portfolio</span>
+          <h3 style="font-size:20px">Warren's work</h3>
+          <p>warrenchanansingh416.myportfolio.com</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <a href="#home" data-nav="home" class="brand" style="margin-bottom:14px">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="1" y="1" width="46" height="46" rx="13" fill="#26242F" stroke="#3a3846"/>
+            <path d="M14 32V16h13" stroke="#E39A2E" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M14 24h9" stroke="#E39A2E" stroke-width="3.4" stroke-linecap="round"/>
+            <circle cx="33" cy="16" r="4.2" fill="#6C5CE0"/>
+          </svg>
+          <span class="brand-word" style="color:var(--on-dark)">Easier<b style="color:var(--amber)">Works</b></span>
+        </a>
+        <p style="max-width:36ch; font-size:14.5px; margin-top:14px">A Toronto technology and AI innovation studio, funded by its own marketing practice.</p>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <a href="#about" data-nav="about">About</a>
+        <a href="#how-we-work" data-nav="how-we-work">How We Work</a>
+        <a href="#contact" data-nav="contact">Contact</a>
+      </div>
+      <div>
+        <h4>Work</h4>
+        <a href="#marketing" data-nav="marketing">Marketing Services</a>
+        <a href="#projects" data-nav="projects">Projects</a>
+        <a href="#partners" data-nav="partners">Partner With Us</a>
+      </div>
+      <div>
+        <h4>Direct</h4>
+        <a href="#contact" data-nav="contact">warren.chanansingh@hotmail.com</a>
+        <a href="#contact" data-nav="contact">+1 437 422 4684</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> EasierWorks. Toronto, Ontario.</span>
+      <span>Incorporation in progress — targeting November 2026.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  document.documentElement.classList.add('js');
+  document.getElementById('year').textContent = new Date().getFullYear();
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------------- Page navigation ---------------- */
+  var pages = Array.prototype.slice.call(document.querySelectorAll('.page'));
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('[data-nav]'));
+  var validPages = pages.map(function(p){ return p.getAttribute('data-page'); });
+
+  function setActiveLinks(name){
+    navLinks.forEach(function(a){
+      if(a.getAttribute('data-nav') === name){ a.setAttribute('aria-current','page'); }
+      else { a.removeAttribute('aria-current'); }
+    });
+  }
+
+  function showPage(name, opts){
+    opts = opts || {};
+    if(validPages.indexOf(name) === -1) name = 'home';
+    pages.forEach(function(p){
+      var isTarget = p.getAttribute('data-page') === name;
+      if(isTarget){
+        p.hidden = false;
+        p.classList.remove('entering');
+        if(!reduceMotion){ void p.offsetWidth; p.classList.add('entering'); }
+      } else if(!p.hidden){
+        p.hidden = true;
+      }
+    });
+    setActiveLinks(name);
+    closeMobileMenu();
+    if(!opts.skipScroll){ window.scrollTo({top:0, behavior: reduceMotion ? 'auto' : 'smooth'}); }
+    var contactBtn = document.getElementById('navContactBtn');
+    if(contactBtn){ contactBtn.style.display = name === 'contact' ? 'none' : 'inline-flex'; }
+  }
+
+  navLinks.forEach(function(a){
+    a.addEventListener('click', function(e){
+      var target = a.getAttribute('data-nav');
+      if(!target) return;
+      e.preventDefault();
+      if(location.hash !== '#' + target){ history.pushState(null, '', '#' + target); }
+      pulseRouteBar();
+      showPage(target);
+    });
+  });
+
+  window.addEventListener('popstate', function(){
+    showPage((location.hash || '#home').slice(1));
+  });
+
+  var initial = (location.hash || '#home').slice(1);
+  showPage(initial, {skipScroll:true});
+  setTimeout(function(){ animateCounters(document); }, 250);
+
+  /* ---------------- Mobile menu ---------------- */
+  var navToggle = document.getElementById('navToggle');
+  var mobileMenu = document.getElementById('mobileMenu');
+  function closeMobileMenu(){
+    if(!mobileMenu) return;
+    mobileMenu.classList.remove('open');
+    if(navToggle) navToggle.setAttribute('aria-expanded','false');
+  }
+  if(navToggle){
+    navToggle.addEventListener('click', function(){
+      var open = mobileMenu.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+
+  /* ---------------- Icon draw-in ---------------- */
+  function prepIcons(scope){
+    Array.prototype.slice.call(scope.querySelectorAll('.icon-badge svg path, .icon-badge svg circle, .icon-badge svg rect')).forEach(function(shape){
+      var len = 40;
+      try{ len = shape.getTotalLength ? shape.getTotalLength() : 40; }catch(e){}
+      shape.style.strokeDasharray = len;
+      shape.style.strokeDashoffset = reduceMotion ? 0 : len;
+    });
+  }
+  function drawIcons(scope){
+    Array.prototype.slice.call(scope.querySelectorAll('.icon-badge svg path, .icon-badge svg circle, .icon-badge svg rect')).forEach(function(shape){
+      shape.style.strokeDashoffset = 0;
+    });
+  }
+  Array.prototype.slice.call(document.querySelectorAll('.icon-badge')).forEach(function(b){ prepIcons(b); });
+
+  /* ---------------- Count-up numbers ---------------- */
+  function animateCounters(scope){
+    Array.prototype.slice.call(scope.querySelectorAll('.count')).forEach(function(el){
+      if(el.dataset.done) return;
+      el.dataset.done = '1';
+      var target = parseFloat(el.getAttribute('data-target')) || 0;
+      if(reduceMotion){ el.textContent = target; return; }
+      var start = performance.now(), dur = 1100;
+      function step(now){
+        var p = Math.min(1, (now-start)/dur);
+        var eased = 1 - Math.pow(1-p, 3);
+        el.textContent = Math.round(target*eased);
+        if(p < 1){ requestAnimationFrame(step); } else { el.textContent = target; }
+      }
+      requestAnimationFrame(step);
+    });
+  }
+
+  /* ---------------- Scroll reveal (staggered) ---------------- */
+  if('IntersectionObserver' in window){
+    var revealEls = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+    revealEls.forEach(function(el){
+      var within = Array.prototype.slice.call(el.parentElement.children).filter(function(c){ return c.classList.contains('reveal'); });
+      var idx = within.indexOf(el);
+      el.style.setProperty('--stagger', reduceMotion ? '0ms' : (Math.min(idx,6) * 70) + 'ms');
+    });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          en.target.classList.add('in-view');
+          drawIcons(en.target);
+          animateCounters(en.target);
+          io.unobserve(en.target);
+        }
+      });
+    }, {threshold:.14, rootMargin:'0px 0px -40px 0px'});
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    Array.prototype.slice.call(document.querySelectorAll('.reveal')).forEach(function(el){ el.classList.add('in-view'); });
+    drawIcons(document); animateCounters(document);
+  }
+
+  /* ---------------- Copy buttons ---------------- */
+  Array.prototype.slice.call(document.querySelectorAll('.copy-btn')).forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var text = btn.getAttribute('data-copy');
+      var done = function(){ var old = btn.textContent; btn.textContent = 'Copied'; setTimeout(function(){ btn.textContent = old; }, 1600); };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done).catch(function(){ fallbackCopy(text); done(); });
+      } else { fallbackCopy(text); done(); }
+    });
+  });
+  function fallbackCopy(text){
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); }catch(e){}
+    document.body.removeChild(ta);
+  }
+
+  /* ---------------- Contact form ---------------- */
+  var form = document.getElementById('contactForm');
+  var successBox = document.getElementById('formSuccess');
+  if(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      if(!form.checkValidity()){ form.reportValidity(); return; }
+      successBox.classList.add('show');
+      form.reset();
+      successBox.scrollIntoView({behavior: reduceMotion ? 'auto' : 'smooth', block:'center'});
+    });
+  }
+
+  /* ---------------- Hero canvas: node network ---------------- */
+  var canvas = document.getElementById('heroCanvas');
+  if(canvas && canvas.getContext){
+    var ctx = canvas.getContext('2d');
+    var W,H,dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var nodes = [];
+    var colors = ['rgba(227,154,46,0.85)','rgba(108,92,224,0.85)','rgba(244,243,238,0.6)'];
+
+    function resize(){
+      var rect = canvas.parentElement.getBoundingClientRect();
+      W = rect.width; H = rect.height;
+      canvas.width = W * dpr; canvas.height = H * dpr;
+      canvas.style.width = W+'px'; canvas.style.height = H+'px';
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+      var count = Math.max(18, Math.min(46, Math.round((W*H)/26000)));
+      nodes = [];
+      for(var i=0;i<count;i++){
+        nodes.push({
+          x: Math.random()*W, y: Math.random()*H,
+          vx: (Math.random()-.5)*.25, vy: (Math.random()-.5)*.25,
+          r: 1.4 + Math.random()*1.8,
+          c: colors[i % colors.length]
+        });
+      }
+    }
+    var linkDist = 150;
+    function frame(){
+      ctx.clearRect(0,0,W,H);
+      for(var i=0;i<nodes.length;i++){
+        var n = nodes[i];
+        n.x += n.vx; n.y += n.vy;
+        if(n.x < 0 || n.x > W) n.vx *= -1;
+        if(n.y < 0 || n.y > H) n.vy *= -1;
+      }
+      for(var i=0;i<nodes.length;i++){
+        for(var j=i+1;j<nodes.length;j++){
+          var a = nodes[i], b = nodes[j];
+          var dx = a.x-b.x, dy = a.y-b.y;
+          var d = Math.sqrt(dx*dx+dy*dy);
+          if(d < linkDist){
+            ctx.strokeStyle = 'rgba(180,178,196,' + (0.12 * (1-d/linkDist)) + ')';
+            ctx.lineWidth = 1;
+            ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+          }
+        }
+      }
+      for(var i=0;i<nodes.length;i++){
+        var n = nodes[i];
+        ctx.beginPath(); ctx.arc(n.x,n.y,n.r,0,Math.PI*2); ctx.fillStyle = n.c; ctx.fill();
+      }
+      if(!reduceMotion){ raf = requestAnimationFrame(frame); }
+    }
+    var raf;
+    resize();
+    if(reduceMotion){ frame(); } else { raf = requestAnimationFrame(frame); }
+    window.addEventListener('resize', function(){ resize(); });
+    document.addEventListener('visibilitychange', function(){
+      if(document.hidden){ if(raf) cancelAnimationFrame(raf); }
+      else if(!reduceMotion){ raf = requestAnimationFrame(frame); }
+    });
+  }
+
+  /* ---------------- Marquee: duplicate content for seamless loop ---------------- */
+  var track = document.getElementById('marqueeTrack');
+  if(track){ track.innerHTML += track.innerHTML; }
+
+  /* ---------------- Route transition bar ---------------- */
+  var routeBar = document.getElementById('routeBar');
+  function pulseRouteBar(){
+    if(!routeBar || reduceMotion) return;
+    routeBar.style.transition = 'none';
+    routeBar.style.width = '0%';
+    routeBar.classList.add('on');
+    void routeBar.offsetWidth;
+    routeBar.style.transition = '';
+    requestAnimationFrame(function(){
+      routeBar.style.width = '72%';
+      setTimeout(function(){
+        routeBar.style.width = '100%';
+        setTimeout(function(){
+          routeBar.classList.remove('on');
+          setTimeout(function(){ routeBar.style.width = '0%'; }, 220);
+        }, 180);
+      }, 180);
+    });
+  }
+
+  /* ---------------- Custom cursor (fine pointers only) ---------------- */
+  var fine = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  if(fine && !reduceMotion){
+    document.documentElement.classList.add('has-cursor');
+    var cDot = document.getElementById('cursorDot');
+    var cRing = document.getElementById('cursorRing');
+    var mx = window.innerWidth/2, my = window.innerHeight/2, rx = mx, ry = my;
+    window.addEventListener('pointermove', function(e){
+      mx = e.clientX; my = e.clientY;
+      document.body.classList.add('cursor-active');
+      if(cDot) cDot.style.transform = 'translate3d(' + mx + 'px,' + my + 'px,0) translate(-50%,-50%)';
+    });
+    (function cursorLoop(){
+      rx += (mx - rx) * .18; ry += (my - ry) * .18;
+      if(cRing) cRing.style.transform = 'translate3d(' + rx + 'px,' + ry + 'px,0) translate(-50%,-50%)';
+      requestAnimationFrame(cursorLoop);
+    })();
+    document.addEventListener('mouseleave', function(){ document.body.classList.remove('cursor-active'); });
+    var hoverTargets = 'a,button,.card,input,textarea,select,.nav-toggle,.copy-btn';
+    document.addEventListener('pointerover', function(e){
+      if(e.target.closest && e.target.closest(hoverTargets)){ document.body.classList.add('cursor-hover'); }
+    });
+    document.addEventListener('pointerout', function(e){
+      if(e.target.closest && e.target.closest(hoverTargets) && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest(hoverTargets))){
+        document.body.classList.remove('cursor-hover');
+      }
+    });
+  }
+
+  /* ---------------- Card tilt (fine pointers only) ---------------- */
+  if(fine && !reduceMotion){
+    Array.prototype.slice.call(document.querySelectorAll('.card')).forEach(function(card){
+      card.addEventListener('mousemove', function(e){
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - .5;
+        var py = (e.clientY - r.top) / r.height - .5;
+        card.style.transform = 'perspective(700px) rotateX(' + (py * -6) + 'deg) rotateY(' + (px * 8) + 'deg) translateZ(4px)';
+      });
+      card.addEventListener('mouseleave', function(){ card.style.transform = ''; });
+    });
+  }
+
+  /* ---------------- Aurora backdrop ---------------- */
+  var aurora = document.getElementById('auroraCanvas');
+  if(aurora && aurora.getContext){
+    var actx = aurora.getContext('2d');
+    var aW, aH, adpr = Math.min(window.devicePixelRatio || 1, 2);
+    var blobs = [
+      {x:.22, y:.28, r:.55, c:'rgba(227,154,46,0.55)', vx:.00019, vy:.00013, t:0},
+      {x:.78, y:.22, r:.5,  c:'rgba(108,92,224,0.5)',  vx:-.00015, vy:.00021, t:2},
+      {x:.5,  y:.85, r:.6,  c:'rgba(76,60,184,0.4)',   vx:.00012, vy:-.00017, t:4}
+    ];
+    function aResize(){
+      var rect = aurora.parentElement.getBoundingClientRect();
+      aW = rect.width; aH = rect.height;
+      aurora.width = aW * adpr; aurora.height = aH * adpr;
+      aurora.style.width = aW + 'px'; aurora.style.height = aH + 'px';
+      actx.setTransform(adpr, 0, 0, adpr, 0, 0);
+    }
+    function aFrame(t){
+      actx.clearRect(0, 0, aW, aH);
+      blobs.forEach(function(b){
+        var bx = (b.x + Math.sin(t * b.vx + b.t) * .08) * aW;
+        var by = (b.y + Math.cos(t * b.vy + b.t) * .08) * aH;
+        var br = b.r * Math.max(aW, aH);
+        var g = actx.createRadialGradient(bx, by, 0, bx, by, br);
+        g.addColorStop(0, b.c);
+        g.addColorStop(1, 'rgba(0,0,0,0)');
+        actx.fillStyle = g;
+        actx.fillRect(0, 0, aW, aH);
+      });
+      if(!reduceMotion){ araf = requestAnimationFrame(aFrame); }
+    }
+    var araf;
+    aResize();
+    if(reduceMotion){ aFrame(0); } else { araf = requestAnimationFrame(aFrame); }
+    window.addEventListener('resize', function(){ aResize(); });
+    document.addEventListener('visibilitychange', function(){
+      if(document.hidden){ if(araf) cancelAnimationFrame(araf); }
+      else if(!reduceMotion){ araf = requestAnimationFrame(aFrame); }
+    });
+  }
+})();
+</script>
+
+
+</body>
+</html>
